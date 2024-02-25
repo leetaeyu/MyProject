@@ -3,10 +3,10 @@ window.addEventListener('load', () => {
     const toDoInput = toDoForm.querySelector('input');
     const toDoList = document.getElementById('todo-list');
 
-    const toDos = [];
+    let toDos = [];
     
-    saveTodos = () => {
-        localStorage.setItem("todos", JSON.stringify(toDos));
+    function saveToDos() {
+        localStorage.setItem("todos", JSON.stringify(toDos));        
     }
 
     deleteToDo = (event) => {
@@ -32,13 +32,15 @@ window.addEventListener('load', () => {
         toDoInput.value = "";
         toDos.push(newTodo);
         paintToDo(newTodo);
-        saveTodos();
+        saveToDos();
     }
 
     toDoForm.addEventListener('submit', handleToDoSubmit);
 
-    const saveToDos = localStorage.getItem('todos');
-    
-    console.log(saveToDos);
-    // #7.4 3분3초
+    const savedToDos = localStorage.getItem('todos');
+    if(savedToDos){
+        const parsedToDos = JSON.parse(savedToDos);
+        toDos = parsedToDos
+        parsedToDos.forEach(paintToDo);
+    }
 })
