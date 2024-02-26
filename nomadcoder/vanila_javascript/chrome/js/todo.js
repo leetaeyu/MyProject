@@ -19,7 +19,7 @@ window.addEventListener('load', () => {
     paintToDo = (newTodo) => {
         const li = document.createElement('li');
         li.id = newTodo.id;
-        const span = document.createElement('spen');
+        const span = document.createElement('span');
         const button = document.createElement('button');
         span.innerText = newTodo.text;
         button.innerText = "X";
