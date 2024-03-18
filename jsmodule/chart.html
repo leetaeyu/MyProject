@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/chart.min.js"></script>
+    <script src="js/chart.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div style="width:100px; height: 100px;">
+        <canvas id="test"></canvas>
+    </div>
+    <div style="width:1000px; height: 1000px;">
+        <canvas id="test2"></canvas>
+    </div>
+    <div style="width:1000px; height: 1000px;">
+        <canvas id="test3"></canvas>
+    </div>
+</body>
+<script>
+    new testChart(ChartType.BAR).init("test")
+    .setData({
+        labels: '123',
+        datasets: [{
+            label:'zzz',
+            data: '1324',
+            backgroundColor:'black'
+        }]
+    })    		    
+    .setTicksStep(200)
+    .setLabelDisplay(false)
+    .setBarGridY(true)
+    .draw();
+
+
+    //다중 데이터
+    new testChart(ChartType.BAR).init("test2")
+    .setDataSetLabel('도로구간A','도로구간B','도로구간C','도로구간D','도로구간E')
+    .setDataSet({
+            label:"효과 전",
+            data:[300, 150, 200, 500, 240],
+            backgroundColor: '#3A7DFF',
+            borderRadius:1,
+            borderWidth:1,
+            fill: false,
+        },{
+            label:"효과 후",
+            data:[200, 120, 140, 350, 160],
+            backgroundColor: '#F90',
+            borderRadius:1,
+            borderWidth:1,
+            fill: false,
+    })
+    .setTicksStep(100)
+    .setAxis('y')
+    .setBarGridY(false)
+    .setBarGridX(true)
+    .setAxisStackedX(false)
+    .setAxisStackedY(false)
+    .draw();
+
+
+	new testChart(ChartType.LINE).init("test3")
+	.setDataSetLabel('20~21시','21~22시','22~23시','23~24시')
+	.setDataSet({
+	    label:'CPU',
+	    data: [0, 5, 3, 1],
+	    backgroundColor:'#FF6B6B',
+	    borderWidth:3,
+	    borderColor:'#FF6B6B',
+	    fill: false
+	}, {
+	    label:'메모리',
+	    data: [5, 1, 6, 2],
+	    backgroundColor:'#FF9900',
+	    borderWidth:3,
+	    borderColor:'#FF9900',
+	    fill: false
+	}, {
+	    label:'디스크',
+	    data: [3, 4, 6, 0],
+	    backgroundColor:'#2E8EFF',
+	    borderWidth:3,
+	    borderColor:'#2E8EFF',
+	    fill: false
+	})
+	
+	.setTicksStep(2)
+	.draw();    
+</script>
+</html>

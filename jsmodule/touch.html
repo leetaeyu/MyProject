@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <title>Document</title>
+</head>
+<style>
+body {
+    overflow-y:hidden;
+}
+.block {
+    height:calc(100vh - 320px);
+    background-color:red;
+    transition:0.3s;
+}
+#box {
+    height:300px;
+    background-color:blue;
+    transition:bottom 0.3s;
+    box-sizing: border-box;
+}
+.map-active {
+    height:calc(100vh - 40px);
+}
+</style>
+<body>
+    <div class="block"></div>
+    <div id="box">
+        <button type="button">test</button>
+    </div>
+</body>
+<script>
+
+    let startY ="";
+    const targetElements = document.getElementById('box');
+    const mapElements = document.querySelector('.block');
+    targetElements.addEventListener('touchstart', (event) => {
+        startY = event.touches[0].clientY;
+    })
+    targetElements.addEventListener('touchmove', (event) => {
+        let currentY = event.touches[0].clientY;
+        if(currentY > startY) {
+            mapElements.classList.add('map-active');
+        } else if(currentY < startY) {
+            mapElements.classList.remove('map-active');
+        }
+    })
+
+</script>
+</html>

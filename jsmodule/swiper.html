@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="js/swiperModule.js"></script>
+    <title>Swiper</title>
+</head>
+<body>
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">test1</div>
+            <div class="swiper-slide">test2</div>
+            <div class="swiper-slide">test3</div>
+            <div class="swiper-slide">test4</div>
+            <div class="swiper-slide">test5</div>
+            <div class="swiper-slide">test6</div>
+            <div class="swiper-slide">test7</div>
+            <div class="swiper-slide">test8</div>
+            <div class="swiper-slide">test9</div>
+            <div class="swiper-slide">test10</div>
+        </div>
+    </div>
+</body>
+
+<script>
+    //반응형 768보다 클때~~~~
+    new swiperSlide(slideShowView.one, 768, 1279).init('mySwiper')
+    .speed(800)
+    .between(20)
+    .responsive(4)
+    .responsive2(2)
+    .draw();
+</script>
+</html>

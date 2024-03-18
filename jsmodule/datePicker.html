@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/datePicker.js"></script>
+    <title>Document</title>
+</head>
+<style>
+</style>
+<body>
+</body>
+<script>
+function weekHTML(date, options) {
+	// 데이터 검증
+	if (date == undefined || date == null || typeof date != "object" || !date instanceof Date) {
+		return "";
+	}
+	
+	setCalendarOptions(options);
+	
+	// 달력 연도
+	var calendarYear = date.getFullYear();
+	// 달력 월
+	var calendarMonth = date.getMonth() + 1;
+	// 달력 일
+	var calendarToday = date.getDate();
+	
+	// 달력 현재 요일
+	var calendarMonthTodayDay = date.getDay();
+	
+	// 주간 날짜 배열
+	var arWeek = [null, null, null, null, null, null, null];
+	
+	var addDay = 0;
+	for (var index = calendarMonthTodayDay; index < 7; index++) {
+		arWeek[index] = new Date(calendarYear, calendarMonth - 1, calendarToday + addDay);
+		addDay++;
+	}
+
+	var addDay = 0;
+	for (var index = calendarMonthTodayDay - 1; index >= 0; index--) {
+		--addDay;
+		arWeek[index] = new Date(calendarYear, calendarMonth - 1, calendarToday + addDay);
+	}
+	
+	// 오늘
+	var today = new Date();
+	
+	var html = "";
+	html += "<table>";
+	if (options.showDay) {
+		html += calendarWeekHTML(options);
+	}
+	html += "<tbody>";
+	html += "<tr>";
+	for (var index = 0; index < 7; index++) {
+		var year = arWeek[index].getFullYear();
+		var month = arWeek[index].getMonth() + 1;
+		var day = arWeek[index].getDate();
+		html += "<td data-date=\"" + year + "-" + (month < 10 ? "0" : "") + month + "-" + (day < 10 ? "0" : "") + day +  "\">";
+		html += "<span";
+		if (options.showToday && year == today.getFullYear() && month == today.getMonth() + 1
+			&& day == today.getDate()) {
+			html += " class=\"today\"";
+		} else {
+			var holiday = false;
+			var holidayInfo = getCalendarHoliday(year, month, day);
+			if (holidayInfo != undefined && holidayInfo != null) {
+				html += " class=\"holiday\"";
+				holiday = true;
+			}
+			if (!holiday) {
+				if (index == 0) {
+					html += " class=\"sunday\"";
+				} else if (index == 6) {
+					html += " class=\"saturday\"";
+				}
+			}
+		}
+		var holidayInfo = getCalendarHoliday(year, month, day);
+		if (holidayInfo != undefined && holidayInfo != null) {
+			html += " title=\"" + holidayInfo.title + "\"";
+		}
+		html += ">" + day + "</span>";
+		html += "</td>";
+	}
+	html += "</tbody>";
+	html += "</table>";
+    console.log(html)
+	return html;
+
+}
+
+$(function(){
+    weekHTML();
+
+})
+</script>
+</html>
