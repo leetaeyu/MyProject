@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class Counter {
+        constructor(runEveryFiveTimes){
+            this.counter = 0;
+            this.callback = runEveryFiveTimes;
+        }
+        increase(runIf5Times) {
+            this.counter++;
+            document.write(this.counter);
+            if(this.counter % 5 === 0) {
+                this.callback && this.callback(this.counter);
+            }
+        }
+    }
+    
+    printSomething = (num) => {
+        document.write(`Wow! ${num}`);
+    }
+
+    alertNum = (num) => {
+        alert(`Wow! ${num}`);
+    }
+    const printCounter = new Counter(printSomething);
+    const alertCounter = new Counter(alertNum);
+
+
+</script>
+</html>
